@@ -376,6 +376,30 @@ def test_PySide2_QtQuick(pyi_builder):
         """)
 
 
+@importorskip('PySide2')
+def test_PySide2_QtUiTools(pyi_builder):
+    pyi_builder.test_source(
+        """
+        import sys
+        from PySide2.QtWidgets import QApplication, QWidget
+        from PySide2.QtCore import QTimer
+        from PySide2.QtUiTools import QUiLoader
+
+
+        app = QApplication( [] )
+
+        app_form = QWidget()
+        app_form.setGeometry(100, 100, 400, 300)
+        app_form.setWindowTitle('Test PySide2.QtUiTools')
+        app_form.show()
+
+        loader = QUiLoader()
+
+        QTimer.singleShot(0, app.exit)
+        sys.exit(app.exec_())
+        """)
+
+
 @importorskip('zope.interface')
 def test_zope_interface(pyi_builder):
     # Tests that `nspkg.pth`-based namespace package are bundled properly.
